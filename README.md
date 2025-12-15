@@ -43,12 +43,12 @@ Dataset bao gồm 2 file CSV:
 1. **spotify_data clean.csv** (1.42 MB)
    - **Rows:** 8,582
    - **Columns:** 15
-   - **Mô tả:** Dữ liệu về các bài hát hiện đại và nghệ sĩ gần đây (chủ yếu từ 2025)
+   - **Mô tả:** Dữ liệu về các bài hát hiện đại và nghệ sĩ trên Spotify từ 2009 đến nay
 
 2. **track_data_final.csv**
    - **Rows:** 8,778
    - **Columns:** 15
-   - **Mô tả:** Dữ liệu về các bài hát phổ biến và kinh điển từ 2009-2023 từ các nghệ sĩ nổi tiếng
+   - **Mô tả:** Bản mở rộng của dữ liệu trong `sportify_data clean.csv`
 
 ### Phương pháp thu thập dữ liệu
 
