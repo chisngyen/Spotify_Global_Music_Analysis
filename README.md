@@ -84,60 +84,96 @@ Dataset bao gồm 2 file CSV:
 
 ## Câu hỏi nghiên cứu
 
-Dự án sẽ trả lời 6 câu hỏi nghiên cứu có ý nghĩa (2 × 3 thành viên), trong đó ít nhất 1 câu hỏi yêu cầu xây dựng và đánh giá mô hình machine learning.
+Dự án trả lời 6 câu hỏi nghiên cứu có ý nghĩa (2 × 3 thành viên), trong đó có 1 câu hỏi xây dựng và đánh giá mô hình machine learning.
 
-### Danh sách câu hỏi (sẽ được cập nhật)
+### Danh sách câu hỏi
 
-1. **[Question 1]** - TBD
-2. **[Question 2]** - TBD
-3. **[Question 3]** - TBD
-4. **[Question 4]** - TBD
-5. **[Question 5]** - TBD
-6. **[Question 6 - ML Model]** - TBD
+1. **[Câu hỏi 1] So sánh loại album**
+   - Độ phổ biến khác nhau như thế nào giữa Album, Single và Compilation?
 
-*(Các câu hỏi chi tiết sẽ được bổ sung sau quá trình khám phá dữ liệu)*
+2. **[Câu hỏi 2] Explicit content và popularity**
+   - Những bài hát có explicit content có độ phổ biến cao hơn hay thấp hơn so với những bài không explicit?
+
+3. **[Câu hỏi 3] Golden duration analysis**
+   - Có tồn tại khoảng thời lượng "vàng" nào cho độ phổ biến của bài hát không?
+
+4. **[Câu hỏi 4] Số lượng bài hát và độ nổi tiếng nghệ sĩ**
+   - Nghệ sĩ phát hành nhiều bài hát có xu hướng nổi tiếng hơn không?
+
+5. **[Câu hỏi 5] Classic songs vs Recent songs**
+   - Nhạc cũ (2009-2015) còn phổ biến bằng nhạc mới (2020-2025) không?
+
+6. **[Câu hỏi 6 - ML Model] Đặc trưng quan trọng theo từng phân khúc**
+   - Các đặc trưng nào quan trọng để dự đoán độ phổ biến của track ở từng phân khúc (thấp, trung bình, cao)?
 
 ---
 
 ## Kết quả chính
 
-*(Phần này sẽ được cập nhật sau khi hoàn thành phân tích)*
+### Phát hiện chính từ phân tích
 
-### Key Findings
+**1. Nội dung tường minh không làm giảm độ phổ biến**
+- Các bài hát có nội dung tường minh đạt mức độ phổ biến cao hơn đáng kể (57.5 vs 50.5)
+- Nghệ sĩ không cần tự kiểm duyệt để đạt được thành công thương mại
 
-1. TBD
-2. TBD
-3. TBD
+**2. Khoảng thời lượng vàng: 3.5-4.5 phút**
+- Bài hát trong khoảng này đạt popularity cao nhất (~55.6-55.9)
+- Bài hát quá ngắn (<2p) hoặc quá dài (>5p) có độ phổ biến thấp hơn
 
-### Insights quan trọng nhất
+**3. Album vượt trội hơn single**
+- Full album có độ phổ biến cao nhất (55.5), vượt single (46.1) và compilation (40.5)
+- Người nghe có xu hướng ưa thích trải nghiệm album trọn vẹn
 
-TBD
+**4. Số lượng bài hát ảnh hưởng đến độ nổi tiếng nghệ sĩ**
+- Nghệ sĩ phát hành nhiều (>100 tracks) đạt popularity gần gấp đôi nghệ sĩ ít (1-20 tracks)
+- Việc phát hành đều đặn quan trọng hơn hoàn thiện một vài bài
+
+**5. Yếu tố thành công khác nhau theo từng phân khúc**
+- Phân khúc thấp: Danh tiếng nghệ sĩ là yếu tố chính (R²=0.47)
+- Phân khúc cao: Khó dự đoán, phụ thuộc nhiều vào may mắn và viral (R²=0.03)
+
+### Kết quả mô hình Machine Learning
+
+**Mô hình dự đoán độ phổ biến track (Track Popularity Prediction):**
+
+| Model | Val R² (10-fold) | Val R² Std | Val MAE | Val RMSE | Test R² | Test MAE | Test RMSE |
+|-------|-----------------|------------|---------|----------|---------|----------|-----------|
+| **LightGBM** | **0.28** | 0.04 | **15.08** | **20.35** | **0.30** | **15.04** | **20.14** |
+| Gradient Boosting | 0.28 | 0.04 | 15.20 | 20.40 | 0.30 | 15.16 | 20.23 |
+| XGBoost | 0.26 | 0.04 | 15.28 | 20.69 | 0.29 | 15.15 | 20.26 |
+| Random Forest | 0.25 | 0.03 | 15.21 | 20.77 | 0.29 | 15.04 | 20.38 |
+| Extra Trees | 0.24 | 0.04 | 15.16 | 20.88 | 0.25 | 15.21 | 20.93 |
+| Linear Regression | 0.22 | 0.03 | 16.15 | 21.24 | 0.23 | 16.11 | 21.11 |
+
+**Mô hình tốt nhất:** LightGBM với Test R²=0.30, Test MAE=15.04, Test RMSE=20.14
+
+### Phát hiện thú vị nhất
+
+**Nhạc cũ (2009-2015) vẫn duy trì độ phổ biến tương đương nhạc mới (2020-2025)**, chứng tỏ giá trị của catalog âm nhạc là lâu dài. Điều này mở ra cơ hội kinh doanh cho việc khai thác lại các bản thu cũ và tạo playlist "throwback"
 
 ---
 
 ## Cấu trúc thư mục
 
 ```
-DS Project/
+Spotify_Global_Music_Analysis/
 │
 ├── dataset/                          # Thư mục chứa dữ liệu
-│   ├── spotify_data clean.csv        # Dataset 2025
-│   └── track_data_final.csv          # Dataset 2009-2023
+│   ├── spotify_data clean.csv        # Dataset chính (8,582 tracks)
+│   └── track_data_final.csv          # Dataset mở rộng (8,778 tracks)
 │
 ├── notebooks/                        # Jupyter notebooks
-│   └── spotify_analysis.ipynb        # Main analysis notebook
+│   ├── 01_data_collection.ipynb      # Thu thập và load dữ liệu
+│   ├── 02_data_exploration.ipynb     # Khám phá dữ liệu ban đầu
+│   ├── 03_question_formulation.ipynb # Xây dựng câu hỏi nghiên cứu
+│   ├── 04_data_analysis.ipynb        # Phân tích và trả lời câu hỏi
+│   ├── 05_reflection.ipynb           # Phản ánh và kết luận
+│   └── final_notebook.ipynb          # Notebook tổng hợp đầy đủ
 │
-├── src/                              # Source code (nếu có)
-│   ├── utils.py                      # Helper functions
-│   └── models.py                     # ML models
-│
-├── docs/                             # Tài liệu
-│   └── team_plan.md                  # Kế hoạch và phân công công việc
-│
-├── README.md                         # File này
-├── project_requirements.txt          # Yêu cầu đồ án
-├── requirements.txt                  # Python dependencies
-└── .gitignore                        # Git ignore file
+├── team_plan.md                      # Kế hoạch và phân công làm việc
+│   
+├── README.md                         # File này - Tổng quan dự án
+└── requirements.txt                  # Python dependencies
 ```
 
 ---
@@ -208,20 +244,6 @@ notebook>=7.0.0
 ```
 
 *(Chi tiết đầy đủ trong file `requirements.txt`)*
-
----
-
-## Tiến trình dự án
-
-- [x] Chọn dataset
-- [x] Thiết lập môi trường làm việc
-- [ ] Khám phá dữ liệu (EDA)
-- [ ] Xác định câu hỏi nghiên cứu
-- [ ] Tiền xử lý dữ liệu
-- [ ] Phân tích và trả lời câu hỏi
-- [ ] Xây dựng ML model
-- [ ] Viết báo cáo và kết luận
-- [ ] Hoàn thiện documentation
 
 ---
 
