@@ -162,13 +162,14 @@ Spotify_Global_Music_Analysis/
 │   ├── 02_data_exploration.ipynb     # Khám phá dữ liệu ban đầu
 │   ├── 03_question_formulation.ipynb # Xây dựng câu hỏi nghiên cứu
 │   ├── 04_data_analysis.ipynb        # Phân tích và trả lời câu hỏi
-│   ├── 04_q1_q2.ipynb                # Notebook con
-│   ├── 04_q3_q4_q5.ipynb             # Notebook con
-│   ├── 04_q6_q7.ipynb                # Notebook con
+│   ├── 04_q1_q2.ipynb                # Notebook con (Trả lời câu hỏi 1 và 2)
+│   ├── 04_q3_q4_q5.ipynb             # Notebook con (Trả lời câu hỏi 3, 4 và 5)
+│   ├── 04_q6_q7.ipynb                # Notebook con (Trả lời câu hỏi 6 và 7)
 │   ├── 05_reflection.ipynb           # Phản ánh và kết luận
 │   └── final_notebook.ipynb          # Notebook tổng hợp đầy đủ
 │ 
 ├── README.md                         # File này - Tổng quan dự án
+├── teamplan-workdistribution.pdf     # Phân công công việc nhóm
 └── requirements.txt                  # Python dependencies
 ```
 
