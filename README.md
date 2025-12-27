@@ -3,11 +3,11 @@
 ## Thông tin nhóm
 
 ### Thành viên
-| Họ và tên | MSSV |
-|-----------|------|
-| Phạm Phú Hòa | 23122030 |
-| Trần Chí Nguyên | 23122044 |
-| Nguyễn Lâm Phú Quý | 23122048 |
+| Họ và tên | MSSV | Email |
+|-----------|------|-------|
+| Phạm Phú Hòa | 23122030 | 23122030@student.hcmus.edu.vn |
+| Trần Chí Nguyên | 23122044 | 23122044@student.hcmus.edu.vn |
+| Nguyễn Lâm Phú Quý | 23122048 | 23122048@student.hcmus.edu.vn |
 
 ### Trường
 **Vietnam National University, Ho Chi Minh City**  
@@ -38,39 +38,43 @@ Dự án này phân tích dữ liệu âm nhạc toàn cầu từ Spotify, bao g
 
 ### Mô tả dataset
 
-Dataset bao gồm 2 file CSV:
-
-1. **spotify_data clean.csv** (1.42 MB)
-   - **Rows:** 8,582
-   - **Columns:** 15
-   - **Mô tả:** Dữ liệu về các bài hát hiện đại và nghệ sĩ trên Spotify từ 2009 đến nay
-
-2. **track_data_final.csv**
+Dataset bao gồm: **track_data_final.csv**
    - **Rows:** 8,778
    - **Columns:** 15
-   - **Mô tả:** Bản mở rộng của dữ liệu trong `sportify_data clean.csv`
 
 ### Phương pháp thu thập dữ liệu
 
 - **Nguồn:** Spotify's public API
 - **Phương pháp:** API extraction
 - **Thời gian thu thập:** 2009 - 2025
-- **Mục đích:** Educational and research purposes only
+- **Mục đích:** Học tập và nghiên cứu
 
 ### Cấu trúc dữ liệu
 
-**Các cột chính:**
-- `track_id`: ID định danh của track
+Ý nghĩa các cột:
+
+Thông tin bài hát (Track Information):
+- `track_id`: Mã định danh duy nhất của bài hát
 - `track_name`: Tên bài hát
-- `track_number`: Số thứ tự track
-- `track_popularity`: Độ phổ biến của track (0-100)
-- `explicit`: Nội dung tường minh (true/false)
+- `track_number`: Vị trí trong album
+- `track_popularity`: Độ phổ biến (0-100)
+- `track_duration_ms`: Thời lượng (milliseconds)
+- `explicit`: Có nội dung nhạy cảm không
+
+Thông tin nghệ sĩ (Artist Information):
 - `artist_name`: Tên nghệ sĩ
-- `artist_popularity`: Độ phổ biến của nghệ sĩ (0-100)
-- `artist_followers`: Số lượng người theo dõi nghệ sĩ
-- `artist_genres`: Thể loại âm nhạc của nghệ sĩ
-- `album_id`: ID của album
-- Và các cột khác...
+- `artist_popularity`: Độ phổ biến nghệ sĩ (0-100)
+- `artist_followers`: Số người theo dõi
+- `artist_genres`: Thể loại âm nhạc
+
+Thông tin Album (Album Information):
+- `album_id`: Mã định danh album
+- `album_name`: Tên album
+- `album_release_date`: Ngày phát hành
+- `album_total_tracks`: Tổng số bài
+- `album_type`: Loại (album/single/compilation)
+
+Các cột quan trọng cho phân tích: `track_popularity`, `artist_popularity`, `artist_followers`, `artist_genres`, `album_release_date`, `track_duration_ms`.
 
 ### Kích thước và độ phức tạp
 
@@ -88,23 +92,13 @@ Dự án trả lời 6 câu hỏi nghiên cứu có ý nghĩa (2 × 3 thành vi�
 
 ### Danh sách câu hỏi
 
-1. **[Câu hỏi 1] So sánh loại album**
-   - Độ phổ biến khác nhau như thế nào giữa Album, Single và Compilation?
-
-2. **[Câu hỏi 2] Explicit content và popularity**
-   - Những bài hát có explicit content có độ phổ biến cao hơn hay thấp hơn so với những bài không explicit?
-
-3. **[Câu hỏi 3] Golden duration analysis**
-   - Có tồn tại khoảng thời lượng "vàng" nào cho độ phổ biến của bài hát không?
-
-4. **[Câu hỏi 4] Số lượng bài hát và độ nổi tiếng nghệ sĩ**
-   - Nghệ sĩ phát hành nhiều bài hát có xu hướng nổi tiếng hơn không?
-
-5. **[Câu hỏi 5] Classic songs vs Recent songs**
-   - Nhạc cũ (2009-2015) còn phổ biến bằng nhạc mới (2020-2025) không?
-
-6. **[Câu hỏi 6 - ML Model] Đặc trưng quan trọng theo từng phân khúc**
-   - Các đặc trưng nào quan trọng để dự đoán độ phổ biến của track ở từng phân khúc (thấp, trung bình, cao)?
+1. Loại album nào (album, compilation, single) có độ phổ biến cao hơn?
+2. Bài hát có nội dung nhạy cảm (explicit = True) có phổ biến hơn không?
+3. Có tồn tại "thời lượng vàng" nào cho bài hát để đạt độ phổ biến cao nhất không?
+4. Nghệ sĩ phát hành nhiều bài hơn có đạt độ nổi tiếng cao hơn không?
+5. Bài hát cũ (2009-2015) có giữ được độ phổ biến so với bài hát mới (2020-2025) không?
+6. Yếu tố nào quan trọng nhất ở từng nhóm mức độ nổi tiếng khác nhau?
+7. Có thể dự đoán độ phổ biến bài hát bằng machine learning không? Độ chính xác ra sao?
 
 ---
 
@@ -136,16 +130,18 @@ Dự án trả lời 6 câu hỏi nghiên cứu có ý nghĩa (2 × 3 thành vi�
 
 **Mô hình dự đoán độ phổ biến track (Track Popularity Prediction):**
 
-| Model | Val R² (10-fold) | Val R² Std | Val MAE | Val RMSE | Test R² | Test MAE | Test RMSE |
-|-------|-----------------|------------|---------|----------|---------|----------|-----------|
-| **LightGBM** | **0.28** | 0.04 | **15.08** | **20.35** | **0.30** | **15.04** | **20.14** |
-| Gradient Boosting | 0.28 | 0.04 | 15.20 | 20.40 | 0.30 | 15.16 | 20.23 |
-| XGBoost | 0.26 | 0.04 | 15.28 | 20.69 | 0.29 | 15.15 | 20.26 |
-| Random Forest | 0.25 | 0.03 | 15.21 | 20.77 | 0.29 | 15.04 | 20.38 |
-| Extra Trees | 0.24 | 0.04 | 15.16 | 20.88 | 0.25 | 15.21 | 20.93 |
-| Linear Regression | 0.22 | 0.03 | 16.15 | 21.24 | 0.23 | 16.11 | 21.11 |
+| Model | Val R² (10-fold) | Val R² Std | Val MAE (10-fold) | Val RMSE (10-fold) | Test R² | Test MAE | Test RMSE |
+|---|---|---|---|---|---|---|---|
+| Linear Regression | 0.247905 | 0.027522 | 15.590526 | 20.834189 | 0.266076 | 15.492175 | 20.674076 |
+| XGBoost | 0.305837 | 0.026445 | 14.344764 | 20.015406 | 0.335108 | 14.191945 | 19.677780 |
+| Random Forest | 0.326508 | 0.028958 | 14.198489 | 19.715141 | 0.351970 | 14.080961 | 19.426658 |
+| Gradient Boosting | 0.320680 | 0.026713 | 14.337259 | 19.800271 | 0.348077 | 14.119382 | 19.484922 |
+| Extra Trees | 0.316147 | 0.041134 | 13.971972 | 19.861647 | 0.337142 | 13.885328 | 19.647661 |
+| LightGBM | 0.319573 | 0.028751 | 14.305053 | 19.815313 | 0.350530 | 14.086811 | 19.448228 |
+| Ensemble (Simple Avg) | - | - | - | - | 0.361574 | 14.035164 | 19.282167 |
+| Ensemble (Weighted Avg) | - | - | - | - | 0.362591 | 14.002097 | 19.266803 |
 
-**Mô hình tốt nhất:** LightGBM với Test R²=0.30, Test MAE=15.04, Test RMSE=20.14
+**Mô hình tốt nhất:** LightGBM với Test R^2=0.355, Test MAE=14.08, Test RMSE=19.44
 
 ### Phát hiện thú vị nhất
 
@@ -159,19 +155,19 @@ Dự án trả lời 6 câu hỏi nghiên cứu có ý nghĩa (2 × 3 thành vi�
 Spotify_Global_Music_Analysis/
 │
 ├── dataset/                          # Thư mục chứa dữ liệu
-│   ├── spotify_data clean.csv        # Dataset chính (8,582 tracks)
-│   └── track_data_final.csv          # Dataset mở rộng (8,778 tracks)
+│   └── track_data_final.csv          # Dataset (8,778 tracks)
 │
 ├── notebooks/                        # Jupyter notebooks
 │   ├── 01_data_collection.ipynb      # Thu thập và load dữ liệu
 │   ├── 02_data_exploration.ipynb     # Khám phá dữ liệu ban đầu
 │   ├── 03_question_formulation.ipynb # Xây dựng câu hỏi nghiên cứu
 │   ├── 04_data_analysis.ipynb        # Phân tích và trả lời câu hỏi
+│   ├── 04_q1_q2.ipynb                # Notebook con
+│   ├── 04_q3_q4_q5.ipynb             # Notebook con
+│   ├── 04_q6_q7.ipynb                # Notebook con
 │   ├── 05_reflection.ipynb           # Phản ánh và kết luận
 │   └── final_notebook.ipynb          # Notebook tổng hợp đầy đủ
-│
-├── team_plan.md                      # Kế hoạch và phân công làm việc
-│   
+│ 
 ├── README.md                         # File này - Tổng quan dự án
 └── requirements.txt                  # Python dependencies
 ```
@@ -225,6 +221,12 @@ pip install -r requirements.txt
 ```
 pandas>=2.0.0
 numpy>=1.24.0
+scipy>=1.10.0
+```
+
+### Visualization
+
+```
 matplotlib>=3.7.0
 seaborn>=0.12.0
 ```
@@ -234,16 +236,20 @@ seaborn>=0.12.0
 ```
 scikit-learn>=1.3.0
 xgboost>=2.0.0
+lightgbm>=4.0.0
 ```
 
-### Data Processing
+### Development Tools
 
 ```
 jupyter>=1.0.0
 notebook>=7.0.0
 ```
 
-*(Chi tiết đầy đủ trong file `requirements.txt`)*
+### Installation
+```
+pip install -r requirements.txt
+```
 
 ---
 
@@ -254,14 +260,3 @@ Nếu có bất kỳ câu hỏi nào về dự án, vui lòng liên hệ:
 - **Trần Chí Nguyên** - 23122044
 - **GitHub Repository:** [Spotify_Global_Music_Analysis](https://github.com/chisngyen/Spotify_Global_Music_Analysis)
 
----
-
-## Tham khảo
-
-1. Spotify API Documentation: https://developer.spotify.com/documentation/web-api
-2. Kaggle Dataset: https://www.kaggle.com/datasets/wardabilal/spotify-global-music-dataset-2009-2025
-3. Course materials: CSC17104 – Programming for Data Science
-
----
-
-**Last Updated:** December 1, 2025
